@@ -3,9 +3,9 @@ from pageindex.parser import parse_document
 from pageindex.indexer import build_summaries
 from pageindex.retriver import retrieve
 from pageindex import storage
-import openai
+import groq
 
-client = openai.OpenAI()
+client = groq.Groq()
 INDEX_PATH = "index.json"
 
 
@@ -30,7 +30,7 @@ def ask(query: str) -> str:
     context = retrieve(query, tree)
 
     response = client.chat.completions.create(
-        model="gpt-5.4",
+        model="llama-3.3-70b-versatile",
         messages=[{
             "role": "user",
             "content": f"Answer using only the context below.\n\nContext:\n{context}\n\nQuestion: {query}"
@@ -44,7 +44,11 @@ if __name__ == "__main__":
     print("Hello World!")
 
     # First time: build the index
-    # build_index("document.md")
+    build_index("document.md")
 
     # Ask questions
-    # print(ask("Question"))
+    print(ask("What is GIL?"))
+
+    print("-----------------------------")
+    
+    print(ask("What is async/await in JavaScript?"))

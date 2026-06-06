@@ -1,8 +1,8 @@
 import json
-import openai
+import groq
 from .node import PageNode
 
-client = openai.OpenAI()
+client = groq.Groq()
 
 SUBSECTION_THRESHOLD = 300  # words
 
@@ -17,7 +17,7 @@ def _segment(text: str) -> list:
         {text[:8000]}"""
 
     response = client.chat.completions.create(
-        model="gpt-5.4-mini",
+        model="llama-3.1-8b-instant",
         messages=[{"role": "user", "content": prompt}],
         max_completion_tokens=3000,
         response_format={"type": "json_object"},

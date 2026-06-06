@@ -1,7 +1,7 @@
-import openai
+import groq
 from .node import PageNode
 
-client = openai.OpenAI()
+client = groq.Groq()
 
 
 def _summarize(text: str, section_name: str = "") -> str:
@@ -10,7 +10,7 @@ def _summarize(text: str, section_name: str = "") -> str:
 
 {text[:3000]}"""
     response = client.chat.completions.create(
-        model="gpt-5.4-mini",
+        model="llama-3.1-8b-instant",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=150,
     )

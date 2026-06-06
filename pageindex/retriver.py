@@ -1,7 +1,7 @@
-import openai
+import groq
 from .node import PageNode
 
-client = openai.OpenAI()
+client = groq.Groq()
 
 
 def _pick_child(query: str, node: PageNode) -> PageNode:
@@ -20,7 +20,7 @@ def _pick_child(query: str, node: PageNode) -> PageNode:
         Which child section most likely contains the answer? Reply with only the number."""
 
     response = client.chat.completions.create(
-        model="gpt-5.4-mini",
+        model="llama-3.1-8b-instant",
         messages=[{"role": "user", "content": prompt}],
         max_completion_tokens=5,
     )
