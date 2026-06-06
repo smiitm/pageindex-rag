@@ -17,9 +17,9 @@ def _segment(text: str) -> list:
         {text[:8000]}"""
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-5.4-mini",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=3000,
+        max_completion_tokens=3000,
         response_format={"type": "json_object"},
     )
     parsed = json.loads(response.choices[0].message.content)

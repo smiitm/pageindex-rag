@@ -22,7 +22,7 @@ def _pick_child(query: str, node: PageNode) -> PageNode:
     response = client.chat.completions.create(
         model="gpt-5.4-mini",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=5,
+        max_completion_tokens=5,
     )
     try:
         index = int(response.choices[0].message.content.strip()) - 1
